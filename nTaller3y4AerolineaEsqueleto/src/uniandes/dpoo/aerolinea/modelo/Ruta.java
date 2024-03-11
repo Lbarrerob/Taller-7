@@ -115,8 +115,7 @@ public class Ruta
 
 	/**
      * Dada una cadena con una hora y minutos, retorna las horas.
-     * 
-     * Por ejemplo, para la cadena '715' retorna 7.
+     *     * Por ejemplo, para la cadena '715' retorna 7.
      * @param horaCompleta Una cadena con una hora, donde los minutos siempre ocupan los dos últimos caracteres
      * @return Una cantidad de horas entre 0 y 23
      */
@@ -125,6 +124,4 @@ public class Ruta
         int horas = Integer.parseInt( horaCompleta ) / 100;
         return horas;
     }
-
-    
 }

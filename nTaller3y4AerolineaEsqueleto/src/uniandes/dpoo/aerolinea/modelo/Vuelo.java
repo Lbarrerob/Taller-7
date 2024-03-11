@@ -2,6 +2,7 @@ package uniandes.dpoo.aerolinea.modelo;
 
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 
 import uniandes.dpoo.aerolinea.modelo.cliente.Cliente;
 import uniandes.dpoo.aerolinea.modelo.tarifas.CalculadoraTarifas;
@@ -87,10 +88,16 @@ public class Vuelo
 	/**
      * Retorna la venta de una determinada cantidad de tiquetes para el vuelo y los deja registrados en el mapa de tiquetes
      */
-	public int venderTiquetes(Cliente vliente, CalculadoraTarifas calculadroa, int cantidad)
+	public int venderTiquetes(Cliente cliente, CalculadoraTarifas calculadora, int cantidad)
 	{
-		// TODO implementar
-		return 0;
+		int total = calculadora.calcularTarifa(this, cliente);
+		int totalFinal = total* cantidad;
+		
+	    for (int i = 0; i < cantidad; i++) {
+	        Tiquete tiquete = new Tiquete(cliente.getIdentificador(), this, cliente, total);
+	        tiquetes.put(tiquete.getCodigo(), tiquete);
+	    }
+	    return totalFinal;
 	}
 	
 	/**
@@ -98,10 +105,14 @@ public class Vuelo
      */
 	public boolean equals(Object obj)
 	{
-		// TODO implementar
-		return false;
-
-		
+		if (this == obj) {
+	        return true;
+	    }
+	    if (obj == null || getClass() != obj.getClass()) {
+	        return false;
+	    }
+	    Vuelo otroVuelo = (Vuelo) obj;
+	    return Objects.equals(ruta, otroVuelo.ruta) && Objects.equals(fecha, otroVuelo.fecha) && Objects.equals(avion, otroVuelo.avion);		
 	}
 
 }

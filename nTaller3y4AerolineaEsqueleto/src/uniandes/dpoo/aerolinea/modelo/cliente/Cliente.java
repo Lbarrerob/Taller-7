@@ -68,6 +68,9 @@ public abstract class Cliente
         for (Tiquete tiquete : tiquetesSinUsar) {
             valorTotal += tiquete.getTarifa();
         }
+        for (Tiquete tiquete : tiquetesUsados) {
+            valorTotal += tiquete.getTarifa();
+        }
         return valorTotal;
 	}
 	

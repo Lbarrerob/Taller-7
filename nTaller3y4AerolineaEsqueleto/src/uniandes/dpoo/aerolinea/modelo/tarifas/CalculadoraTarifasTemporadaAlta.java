@@ -20,14 +20,35 @@ public class CalculadoraTarifasTemporadaAlta extends CalculadoraTarifas
     //
     // ************************************************************************************
 	
-	protected int calcularCostoBase(Vuelo vuelo, Cliente cliente) {
-		// TODO Auto-generated method stub
-		return 0;
+	/**
+     * Calcula el costo base como COSTO_POR_KM x distancia.
+     */
+	protected int calcularCostoBase(Vuelo vuelo, Cliente cliente) 
+	{
+		double distancia = super.calcularDistanciaVuelo(vuelo.getRuta());
+	    double costoBase = COSTO_POR_KM * distancia;
+
+	    return (int) costoBase;
 	}
- 
-	protected double calcularPorcentajeDescuento(Cliente cliente) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	/**
+     * Calcula el porcentaje de descuento que se le debería dar a un cliente dado su tipo y/o su historia. 
+     */
+	protected double calcularPorcentajeDescuento(Cliente cliente) 
+	{
+		double porcentajeDescuento = 0;
+		
+		if (cliente.calcularValorTotalTiquetes() > 500000 && cliente.calcularValorTotalTiquetes() < 1999999) {
+	        porcentajeDescuento += 0.05; 
+	    }
+		if (cliente.calcularValorTotalTiquetes() > 2000000 && cliente.calcularValorTotalTiquetes() < 4999999) {
+	        porcentajeDescuento += 0.10; 
+	    }
+		if (cliente.calcularValorTotalTiquetes() > 5000000) {
+	        porcentajeDescuento += 0.20; 
+	    }
+
+	    return porcentajeDescuento;
 	}
 
 }

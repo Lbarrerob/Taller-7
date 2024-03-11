@@ -31,8 +31,14 @@ public abstract class CalculadoraTarifas
      */
 	public int calcularTarifa(Vuelo vuelo, Cliente cliente)
 	{
-		// TODO implementar
-		return 0;
+		int costoBase = calcularCostoBase(vuelo, cliente);
+        double porcentajeDescuento = calcularPorcentajeDescuento(cliente);
+        int valorImpuestos = calcularValorImpuesos(costoBase);
+
+        int descuento = (int) (costoBase * porcentajeDescuento);
+        int tarifaTotal = (int) ((costoBase - descuento) * (1 + valorImpuestos));
+
+        return tarifaTotal;
 	}
 	
 	// Métodos abstractos que deben ser implementados por la calculadora de temporada alta y baja
@@ -80,8 +86,8 @@ public abstract class CalculadoraTarifas
      */
 	protected int calcularValorImpuesos(int costoBase)
 	{
-		// TODO implementar
-		return 0;
+		int valorImpuestos = (int) (costoBase * IMPUESTO);
+	    return valorImpuestos;
 	}
 
 }

@@ -100,26 +100,9 @@ public class Tiquete
 	{
 		return usado;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+	public void setUsado(boolean usado) {
+		this.usado = usado;
+	}
 	
 }

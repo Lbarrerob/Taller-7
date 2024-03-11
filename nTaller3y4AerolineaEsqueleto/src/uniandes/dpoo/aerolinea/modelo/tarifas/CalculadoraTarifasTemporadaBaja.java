@@ -2,6 +2,7 @@ package uniandes.dpoo.aerolinea.modelo.tarifas;
 
 import uniandes.dpoo.aerolinea.modelo.Vuelo;
 import uniandes.dpoo.aerolinea.modelo.cliente.Cliente;
+import uniandes.dpoo.aerolinea.modelo.cliente.ClienteCorporativo;
 
 public class CalculadoraTarifasTemporadaBaja extends CalculadoraTarifas 
 {
@@ -38,14 +39,51 @@ public class CalculadoraTarifasTemporadaBaja extends CalculadoraTarifas
     //
     // ************************************************************************************
 
-	protected int calcularCostoBase(Vuelo vuelo, Cliente cliente) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
- 
-	protected double calcularPorcentajeDescuento(Cliente cliente) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	/**
+     * Calcula el costo base como COSTO_POR_KM x distancia.
+     */
+	protected int calcularCostoBase(Vuelo vuelo, Cliente cliente) 
+	{
+		double distancia = super.calcularDistanciaVuelo(vuelo.getRuta());
+		
+		double costoBase = 0;
+		
+		if (cliente.getTipoCliente()== "Natural") {
+			costoBase = COSTO_POR_KM_NATURAL * distancia;
+		}
+		
+		if (cliente.getTipoCliente()== "Corporativo") {
+			costoBase = COSTO_POR_KM_CORPORATIVO * distancia;
+		}
 
+	    return (int) costoBase;
+	}
+	
+	/**
+     * Calcula el porcentaje de descuento que se le debería dar a un cliente dado su tipo y/o su historia. 
+     */
+	protected double calcularPorcentajeDescuento(Cliente cliente) 
+	{
+		double porcentajeDescuento = 0;
+	    
+	    if (cliente instanceof ClienteCorporativo) {
+	        ClienteCorporativo clienteCorporativo = (ClienteCorporativo) cliente;
+	        switch (clienteCorporativo.getTamanoEmpresa()) {
+	            case 1:
+	                porcentajeDescuento = DESCUENTO_PEQ;
+	                break;
+	            case 2:
+	                porcentajeDescuento = DESCUENTO_MEDIANAS;
+	                break;
+	            case 3:
+	                porcentajeDescuento = DESCUENTO_GRANDES;
+	                break;
+	            default:
+	                porcentajeDescuento = 0; 
+	                break;
+	        }
+	    }
+	    
+	    return porcentajeDescuento;
+	}
 }
