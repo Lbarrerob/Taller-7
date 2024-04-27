@@ -3,6 +3,10 @@ package inventario;
 public class Pintura extends ObraDeArte
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//heredados
 	private int codigoRegistro;
 	private String tipoPieza;

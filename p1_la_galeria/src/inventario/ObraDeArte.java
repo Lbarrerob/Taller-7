@@ -1,7 +1,13 @@
 package inventario;
 
-public abstract class ObraDeArte 
+import java.io.Serializable;
+
+public abstract class ObraDeArte implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//atributos
 	private int codigoRegistro; //único para cada pieza
 	private String tipoPieza;

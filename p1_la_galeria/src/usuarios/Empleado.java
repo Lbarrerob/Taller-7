@@ -3,6 +3,10 @@ package usuarios;
 public class Empleado extends Usuario
 {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//heredados
 	private String nombre;
 	private int identificacion; // identificador único

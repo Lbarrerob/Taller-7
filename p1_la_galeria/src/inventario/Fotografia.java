@@ -3,6 +3,10 @@ package inventario;
 public class Fotografia extends ObraDeArte 
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//heredados
 	private int codigoRegistro; //único para cada pieza
 	private String tipoPieza;

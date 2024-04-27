@@ -4,6 +4,11 @@ public class Ceramica extends ObraDeArte
 {
 	
 	//heredados
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int codigoRegistro; //único para cada pieza
 	private String tipoPieza;
 	private String titulo;
@@ -135,4 +140,3 @@ public class Ceramica extends ObraDeArte
 	
 	
 }
-

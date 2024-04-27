@@ -6,6 +6,10 @@ import inventario.ObraDeArte;
 
 public class Cliente extends Usuario
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//heredados 
 	private String nombre;
 	private int identificacion; // identificador único
