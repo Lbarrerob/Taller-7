@@ -20,15 +20,15 @@ public class Cliente extends Usuario
 	private String password;
 	
 	//atributos
-	private float ingreso;
-	private int limiteCompra;
+	private double ingreso;
+	private double limiteCompra;
 	private HashMap<Integer, ObraDeArte> historialPropiedad;
 	private HashMap<Integer, ObraDeArte> historialCompra;
 	
 	
 	//constuctor
 	public Cliente(String nombre, int identificacion, int telefono, String correo, String login, String password,
-				float ingreso, int limiteCompra) 
+				double ingreso, double limiteCompra) 
 	{
 		super(nombre, identificacion, telefono, correo, login, password);
 		// TODO Auto-generated constructor stub
@@ -51,7 +51,7 @@ public class Cliente extends Usuario
 		}
 	}
 
-	public int getLimiteCompra() {
+	public double getLimiteCompra() {
 		return limiteCompra;
 	}
 

@@ -2,6 +2,7 @@ package usuarios;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map.Entry;
 
 import inventario.ObraDeArte;
 import transacciones.Compra;
@@ -138,47 +139,37 @@ public class Empleado extends Usuario
     }
 
 	
-	public String verHistorialComprador(Cliente cliente, Empleado empleado) {
-	    if (!empleado.getTipo().equals("Administrador")) {
-	        return "No tienes permiso para ver el historial de comprador";
+	public void mostrarHistorialPropiedadCliente(Cliente cliente,  Empleado empleado) {
+		if (!empleado.getTipo().equals("Administrador")) {
+	        System.out.println("No tienes permiso para realizar esta acción.");
+	        return;
 	    }
 
-	    StringBuilder historia = new StringBuilder();
-	    historia.append("Historia del comprador ").append(cliente.getNombre()).append(":\n");
+	    StringBuilder stringBuilder = new StringBuilder();
+	    stringBuilder.append("Historial de propiedad de ").append(cliente.getNombre()).append(":\n");
 
-	    // Obtener todas las compras del comprador
-	    HashMap<Integer, ObraDeArte> compras = cliente.consultarHistorialCompra();
-	    if (compras.isEmpty()) {
-	        historia.append("El comprador no ha realizado compras.\n");
-	    } else {
-	        historia.append("Compras realizadas:\n");
-	        for (Compra compra : compras.values()) {
-	            ObraDeArte piezaComprada = compra.getObrasCompradas().get(cliente.getCodigo());
-
-	            historia.append("- Fecha de compra: ").append(compra.getFechaVenta())
-	                    .append(", Pieza: ").append(piezaComprada.getTitulo())
-	                    .append(", Precio: ").append(piezaComprada.getValor()).append("\n");
-	        }
+	    // Mostrar todas las obras que ha comprado el cliente
+	    stringBuilder.append("Obras compradas:\n");
+	    for (Entry<Integer, ObraDeArte> entry : cliente.consultarHistorialCompra().entrySet()) {
+	        ObraDeArte obra = entry.getValue();
+	        stringBuilder.append("Obra: ").append(obra.getTitulo()).append(" - Fecha de compra: ").append(obra.getFechaVenta()).append("\n");
 	    }
 
-	    // Obtener todas las piezas de arte que son propiedad del comprador
-	    HashMap<Integer, ObraDeArte> piezasPropiedad = cliente.consultarHistorialPropiedad();
-	    if (piezasPropiedad.isEmpty()) {
-	        historia.append("El comprador no es propietario de ninguna pieza de arte.\n");
-	    } else {
-	        historia.append("Piezas de arte en su propiedad:\n");
-	        for (ObraDeArte piezaPropiedad : piezasPropiedad.values()) {
-	            historia.append("- Título: ").append(piezaPropiedad.getTitulo())
-	                    .append(", Fecha de compra: ").append(piezaPropiedad.getFechaVenta())
-	                    .append(", Precio de compra: ").append(piezaPropiedad.getValor()).append("\n");
-	        }
+	    // Mostrar las obras que actualmente son de su propiedad
+	    stringBuilder.append("Obras actuales del cliente:\n");
+	    for (Entry<Integer, ObraDeArte> entry : cliente.consultarHistorialPropiedad().entrySet()) {
+	        ObraDeArte obra = entry.getValue();
+	        stringBuilder.append("Obra: ").append(obra.getTitulo()).append("\n");
 	    }
 
-	    // Calcular el valor total de la colección del comprador
-	    int valorTotal = cliente.calcularValorColeccion();
-	    historia.append("Valor total de la colección: ").append(valorTotal);
+	    // Calcular y mostrar el valor total de la colección
+	    float valorTotalColeccion = 0;
+	    for (ObraDeArte obra : cliente.consultarHistorialPropiedad().values()) {
+	        valorTotalColeccion += obra.getValor();
+	    }
+	    stringBuilder.append("Valor total de la colección: ").append(valorTotalColeccion);
 
-	    return historia.toString();
+	    System.out.println(stringBuilder.toString());
 	}
 }
 

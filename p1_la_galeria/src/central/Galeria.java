@@ -32,6 +32,7 @@ public class Galeria implements Serializable
 	private HashMap<Integer, ObraDeArte> piezas;
 	private ArrayList<Empleado> empleados;
 	private ArrayList<Cliente> clientes;
+	private ArrayList<Artista> artistas;
 	private ArrayList<Pago> pagosTransferencia;
 	private ArrayList<Pago> pagosEfectivo;
 	
@@ -42,6 +43,7 @@ public class Galeria implements Serializable
 		this.piezas = new HashMap<Integer, ObraDeArte>(); 
 		this.empleados = new ArrayList<Empleado>();
 		this.clientes = new ArrayList<Cliente>();
+		this.artistas = new ArrayList<Artista>();
 		this.pagosTransferencia = new ArrayList<Pago>();
 		this.pagosEfectivo = new ArrayList<Pago>();	
 	}
@@ -55,6 +57,11 @@ public class Galeria implements Serializable
 	public ArrayList<Cliente> consultarClientes() {
 		return clientes;
 	}
+
+	public ArrayList<Artista> getArtistas() {
+		return artistas;
+	}
+
 
 	public HashMap<Integer, ObraDeArte> consultarInventarioPieza() {
 		return piezas;
@@ -109,7 +116,7 @@ public class Galeria implements Serializable
 	
 	
 	public void registrarCliente (String nombre, int identificacion, int telefono, String correo, 
-								String login, String password, float ingreso, int limiteCompra) 
+								String login, String password, double ingreso, double limiteCompra) 
 	{
 		boolean existeUsuario = false;
 		
@@ -121,7 +128,6 @@ public class Galeria implements Serializable
 	            break;
 			}
 		}
-		
 		
 		//Para crear el nuevo cliente
 		if (!existeUsuario) {
@@ -149,7 +155,27 @@ public class Galeria implements Serializable
 		return fechaDevolucion;
 	}
 	
-
+	
+	public Empleado obtenerEmpleadoPorIdentificacion(int identificacion) {
+	    for (Empleado empleado : empleados) {
+	        if (empleado.getIdentificacion() == identificacion) {
+	            return empleado;
+	        }
+	    }
+	    return null; // Retornar null si no se encuentra ningún empleado con esa identificación
+	}
+	
+	
+	public Artista obtenerArtistaPorNombre(String nombre) {
+	    for (Artista artista : artistas) {
+	        if (artista.getNombre() == nombre) {
+	            return artista;
+	        }
+	    }
+	    return null; // Retornar null si no se encuentra ningún empleado con esa identificación
+	}
+	
+	
 	public String IngresarPinturaConsignacion (Date fechaIngreso, String titulo, int anio, String lugar, Artista autor, boolean exhibicion, String estado, int valor, 
 										boolean esFijo, int propietarioActual, Date fechaVenta, float alto, float ancho, String tecnica, String periodo, String genero) 
 	{
