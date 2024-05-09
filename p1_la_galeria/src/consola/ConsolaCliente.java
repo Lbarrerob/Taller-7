@@ -1,9 +1,8 @@
 package consola;
 
+import central.Galeria;
 import java.util.ArrayList;
 import java.util.Date;
-
-import central.Galeria;
 import usuarios.Artista;
 import usuarios.Empleado;
 
@@ -55,7 +54,7 @@ public class ConsolaCliente extends ConsolaBasica
 		     int identificacionEmpleado = pedirEnteroAlUsuario("Ingrese el identificador del empleado que lo está atendiendo:  ");
 		     Empleado empleado = galeria.obtenerEmpleadoPorIdentificacion(identificacionEmpleado);
 
-		     String resultado = galeria.comprarPiezas(codigosRegistro, identificacion, fecha, tipoPago, empleado);
+		     String resultado = galeria.comprarPiezas(codigosRegistro, identificacion, fecha, tipoPago, empleado, galeria);
 		     System.out.println(resultado);	 
 		 
 		 }
@@ -74,7 +73,7 @@ public class ConsolaCliente extends ConsolaBasica
 		     int identificacionEmpleado = pedirEnteroAlUsuario("Ingrese el identificador del empleado que lo está atendiendo:  ");
 		     Empleado empleado = galeria.obtenerEmpleadoPorIdentificacion(identificacionEmpleado);
 
-		     String resultado = galeria.ofertarPiezas(codigosRegistro, oferta, identificacion, fecha, tipoPago, limiteFecha, empleado);
+		     String resultado = galeria.ofertarPiezas(codigosRegistro, oferta, identificacion, fecha, tipoPago, limiteFecha, empleado, galeria);
 		     System.out.println(resultado);
 		 }
 		 
