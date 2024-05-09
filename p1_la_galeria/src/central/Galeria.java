@@ -1,5 +1,12 @@
 package central;
 
+import inventario.Ceramica;
+import inventario.Escultura;
+import inventario.Fotografia;
+import inventario.Grabado;
+import inventario.ObraDeArte;
+import inventario.Pintura;
+import inventario.Video;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -8,15 +15,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import transacciones.Compra;
-import transacciones.Subasta;
-import inventario.Ceramica;
-import inventario.Escultura;
-import inventario.Fotografia;
-import inventario.Grabado;
-import inventario.ObraDeArte;
-import inventario.Pintura;
-import inventario.Video;
 import transacciones.Pago;
+import transacciones.Subasta;
 import usuarios.Artista;
 import usuarios.Cliente;
 import usuarios.Empleado;
@@ -32,6 +32,8 @@ public class Galeria implements Serializable
 	private HashMap<Integer, ObraDeArte> piezas;
 	private ArrayList<Empleado> empleados;
 	private ArrayList<Cliente> clientes;
+	private HashMap<Integer,Cliente> clientesMap;
+	private HashMap<Integer,Empleado> empleadosMap;
 	private ArrayList<Artista> artistas;
 	private ArrayList<Pago> pagosTransferencia;
 	private ArrayList<Pago> pagosEfectivo;
@@ -44,6 +46,8 @@ public class Galeria implements Serializable
 		this.empleados = new ArrayList<Empleado>();
 		this.clientes = new ArrayList<Cliente>();
 		this.artistas = new ArrayList<Artista>();
+		this.clientesMap = new HashMap<Integer,Cliente>();
+		this.empleadosMap = new HashMap<Integer,Empleado>();
 		this.pagosTransferencia = new ArrayList<Pago>();
 		this.pagosEfectivo = new ArrayList<Pago>();	
 	}
@@ -74,7 +78,24 @@ public class Galeria implements Serializable
 	public ArrayList<Pago> consultarHistorialPagosEfectivo() {
 		return pagosEfectivo;
 	}
+
+	public HashMap<Integer,Cliente> getClientesMap() {
+		return clientesMap;
+	}
+
+
+	public void setClientesMap(HashMap<Integer,Cliente> clientesMap) {
+		this.clientesMap = clientesMap;
+	}
 	
+	public HashMap<Integer,Empleado> getEmpleadosMap() {
+		return empleadosMap;
+	}
+
+
+	public void setEmpleadosMap(HashMap<Integer,Empleado> empleadosMap) {
+		this.empleadosMap = empleadosMap;
+	}
 	
 	public void registrarEmpleado (String nombre, int identificacion, int telefono, String correo, 
 								String login, String password, String tipo) 
@@ -109,6 +130,7 @@ public class Galeria implements Serializable
 					//crear nuevo empleado y agregar a la lista de empleados
 					Empleado nEmpleado = new Empleado (nombre, identificacion, telefono, correo, login, password, tipo);
 					empleados.add(nEmpleado);
+					empleadosMap.put(identificacion, nEmpleado);
 				}
 	 		}
 		
@@ -139,6 +161,7 @@ public class Galeria implements Serializable
 					//crear nuevo empleado y agregar a la lista de empleados
 					Cliente nCliente = new Cliente (nombre, identificacion, telefono, correo, login, password, ingreso, limiteCompra);
 					clientes.add(nCliente);
+					clientesMap.put(identificacion, nCliente);
 				}
 			 }
 	}
@@ -331,7 +354,7 @@ public class Galeria implements Serializable
 	}
 	
 	
-	public String comprarPiezas(String codigosRegistro, int identificacion, Date fecha, String tipoPago, Empleado empleado) {
+	public String comprarPiezas(String codigosRegistro, int identificacion, Date fecha, String tipoPago, Empleado empleado, Galeria galeria) {
 	    String ans = "";
 	    String[] codigos = codigosRegistro.split(", ");
 	    String tipoSolicitud = "Compra";
@@ -350,11 +373,10 @@ public class Galeria implements Serializable
 	            compra.bloquearPieza(pieza);
 	            if (compra.verificarCompra()) {
 	                compra.aprobarCompra();
-	                compra.agregarPiezaMapaPropiedades(identificacion, codigosRegistro, pieza);
+	                compra.agregarPiezaMapaPropiedades(identificacion, galeria, codigosRegistro, pieza);
 	                compra.actualizarPropietario(pieza, identificacion);
-	                compra.agregarPiezaMapaCompras(identificacion, codigosRegistro, pieza);
+	                compra.agregarPiezaMapaCompras(identificacion, galeria, codigosRegistro, pieza);
 	                compra.cambiarEstadoPieza(pieza);
-	                compra.eliminarPiezaMapaPropiedad(identificacion, codigosRegistro, pieza);
 	                Pago pago = new Pago(tipoPago, pieza.getValor(), identificacion, Integer.parseInt(codigo));
 	                empleado.registrarPago(pago);
 	                pieza.agregarPropietario(identificacion);
@@ -373,7 +395,7 @@ public class Galeria implements Serializable
 	}
 	
 	
-	public String ofertarPiezas(String codigosRegistro, int oferta, int identificacion, Date fecha, String tipoPago, double limiteFecha, Empleado empleado) {
+	public String ofertarPiezas(String codigosRegistro, int oferta, int identificacion, Date fecha, String tipoPago, double limiteFecha, Empleado empleado, Galeria galeria) {
 	    String ans = "";
 	    String[] codigos = codigosRegistro.split(", ");
 	    String tipoSolicitud = "Subasta";
@@ -396,10 +418,9 @@ public class Galeria implements Serializable
 	                    Pago pago = new Pago(tipoPago, pieza.getValor(), identificacion, Integer.parseInt(codigo));
 	                    empleado.registrarPago(pago);
 	                    subasta.actualizarPropietario(pieza, identificacion);
-	                    subasta.agregarPiezaMapaPropiedades(identificacion, codigosRegistro, pieza);
-	                    subasta.agregarPiezaMapaCompras(identificacion, codigosRegistro, pieza);
+	                    subasta.agregarPiezaMapaPropiedades(identificacion, galeria, codigosRegistro, pieza);
+	                    subasta.agregarPiezaMapaCompras(identificacion, galeria, codigosRegistro, pieza);
 	                    subasta.cambiarEstadoPieza(pieza);
-	                    subasta.eliminarPiezaMapaPropiedad(identificacion, codigosRegistro, pieza);
 	                    pieza.agregarPropietario(identificacion);
 	                    pieza.setFechaVenta(fecha);
 	                } else {
