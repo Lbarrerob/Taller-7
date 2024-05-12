@@ -129,6 +129,10 @@ public abstract class ObraDeArte implements Serializable
 		return valor_minimo;
 	}
 	
+	public int setValor_minimo(int valor) {
+		return this.valor_minimo = valor;
+	}
+	
 	public ArrayList<Integer> setHistorialPropietarios() {
 		return historialPropietarios;
 	}
