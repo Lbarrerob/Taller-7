@@ -98,6 +98,29 @@ public class Empleado extends Usuario
         pagosRealizados.add(pago);
     }
 	
+	
+	public int determinarValorMinimoOferta(ArrayList<ObraDeArte> obras) {
+	    int totalValorMinimo = 0;
+	    for (ObraDeArte obra : obras) {
+	        if (this.tipo.equals("Administrador") && obra.getEstado().equals("En subasta")) {
+	            int valorMinimo = calcularValorMinimo(obra);
+	            obra.setValor_minimo(valorMinimo);
+	            System.out.println("Valor mínimo de oferta establecido para la obra " + obra.getCodigoRegistro() + ": " + valorMinimo);
+	            totalValorMinimo += valorMinimo;
+	        } else {
+	            System.out.println("Acción no permitida para este empleado o estado de la obra incorrecto para la obra " + obra.getCodigoRegistro());
+	        }
+	    }
+	    return totalValorMinimo;
+	}
+	
+
+	private int calcularValorMinimo(ObraDeArte obra) 
+	{
+	    return (int)(obra.getValor() * 0.8); // 80% del valor de la obra
+	}
+	
+	
 	public String verHistorialPieza(int codigoRegistro, ArrayList<ObraDeArte> obras) 
 	{
 	    for (ObraDeArte obra : obras) {

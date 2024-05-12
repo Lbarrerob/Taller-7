@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import transacciones.Compra;
 import transacciones.Pago;
@@ -197,6 +198,24 @@ public class Galeria implements Serializable
 	    }
 	    return null; // Retornar null si no se encuentra ningún empleado con esa identificación
 	}
+	
+	public ArrayList<ObraDeArte> obtenerObrasPorCodigos(String codigos) {
+        ArrayList<ObraDeArte> obras = new ArrayList<>();
+        String[] codigoArray = codigos.split(",");
+        for (String codigo : codigoArray) {
+            try {
+                Integer codigoInt = Integer.parseInt(codigo.trim());
+                ObraDeArte obra = piezas.get(codigoInt);
+                if (obra != null) {
+                    obras.add(obra);
+                }
+            } catch (NumberFormatException e) {
+                // Código no válido, ignorar o manejar el error según sea necesario
+                System.out.println("Código no válido: " + codigo);
+            }
+        }
+        return obras;
+    }
 	
 	
 	public String IngresarPinturaConsignacion (Date fechaIngreso, String titulo, int anio, String lugar, Artista autor, boolean exhibicion, String estado, int valor, 
@@ -395,7 +414,8 @@ public class Galeria implements Serializable
 	}
 	
 	
-	public String ofertarPiezas(String codigosRegistro, int oferta, int identificacion, Date fecha, String tipoPago, double limiteFecha, Empleado empleado, Galeria galeria, int valor_minimo) {
+	public String ofertarPiezas(String codigosRegistro, int oferta, int identificacion, Date fecha, String tipoPago, double limiteFecha, Empleado empleado, Galeria galeria, int valor_minimo) 
+	{
 	    String ans = "";
 	    String[] codigos = codigosRegistro.split(", ");
 	    String tipoSolicitud = "Subasta";

@@ -1,6 +1,8 @@
 package consola;
 
 import central.Galeria;
+import inventario.ObraDeArte;
+
 import java.util.ArrayList;
 import java.util.Date;
 import usuarios.Artista;
@@ -72,10 +74,13 @@ public class ConsolaCliente extends ConsolaBasica
 		     double limiteFecha = pedirNumeroAlUsuario("Ingrese el límite de fecha para la oferta: ");
 		     int identificacionEmpleado = pedirEnteroAlUsuario("Ingrese el identificador del empleado que lo está atendiendo:  ");
 		     Empleado empleado = galeria.obtenerEmpleadoPorIdentificacion(identificacionEmpleado);
+		     ArrayList<ObraDeArte> piezas = galeria.obtenerObrasPorCodigos(codigosRegistro);
+		     int valorMinimo = empleado.determinarValorMinimoOferta(piezas);
 
-		     String resultado = galeria.ofertarPiezas(codigosRegistro, oferta, identificacion, fecha, tipoPago, limiteFecha, empleado, galeria);
+		     String resultado = galeria.ofertarPiezas(codigosRegistro, oferta, identificacion, fecha, tipoPago, limiteFecha, empleado, galeria, valorMinimo);
 		     System.out.println(resultado);
 		 }
+		 
 		 
 		 private void ingresarPiezaConsignación() 
 		 {
