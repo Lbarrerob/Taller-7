@@ -1,7 +1,9 @@
 package usuarios;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
+import central.Galeria;
 import inventario.ObraDeArte;
 
 @SuppressWarnings("unused")
@@ -115,19 +117,27 @@ public class Cliente extends Usuario
 		this.historialCompra = historialCompra;
 	}
 	
-	public void consultarPropiedadesActuales() {
-        System.out.println("Propiedades actuales del cliente:");
-        for (ObraDeArte obra : historialPropiedad.values()) {
-            System.out.println("Código: " + obra.getCodigoRegistro() + ", Título: " + obra.getTitulo());
-        }
-    }
+	public ArrayList<ObraDeArte> consultarHistorialPropiedades(int identificacionCliente) {
+	    ArrayList<ObraDeArte> historial = new ArrayList<>();
+	    for (Integer codigoRegistro : historialPropiedad.keySet()) {
+	        ObraDeArte obra = historialPropiedad.get(codigoRegistro);
+	        if (obra.getPropietarioActual() == identificacionCliente) {
+	            historial.add(obra);
+	        }
+	    }
+	    return historial;
+	}
 
-    public void consultarHistorialCompras() {
-        System.out.println("Historial de compras del cliente:");
-        for (ObraDeArte obra : historialCompra.values()) {
-            System.out.println("Código: " + obra.getCodigoRegistro() + ", Título: " + obra.getTitulo());
-        }
-    }
+	public ArrayList<ObraDeArte> consultarHistorialCompras(int identificacionCliente) {
+	    ArrayList<ObraDeArte> historial = new ArrayList<>();
+	    for (Integer codigoRegistro : historialCompra.keySet()) {
+	        ObraDeArte obra = historialCompra.get(codigoRegistro);
+	        if (obra.getPropietarioActual() == identificacionCliente) {
+	            historial.add(obra);
+	        }
+	    }
+	    return historial;
+	}
 
 }
 

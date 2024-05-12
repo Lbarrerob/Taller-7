@@ -81,6 +81,7 @@ public class ConsolaCliente extends ConsolaBasica
 		     System.out.println(resultado);
 		 }
 		 
+		 
 		 private void ingresarPiezaConsignación() 
 		 {
 			 mostrarMenuIngresoObra();
