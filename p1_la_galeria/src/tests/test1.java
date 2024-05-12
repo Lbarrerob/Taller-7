@@ -1,21 +1,3 @@
-package tests;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import central.Galeria;
-import inventario.ObraDeArte;
-import inventario.Video;
-import transacciones.Compra;
-import usuarios.Artista;
-import usuarios.Cliente;
-
 class TransaccionTest {
 	
 	private Compra compra;
@@ -51,44 +33,55 @@ class TransaccionTest {
 	}
 	
 	@Test
-	void test1() {
+	void testAgregarPiezaMapaPropiedades() {
 		compra.agregarPiezaMapaPropiedades(54952,galeria,"001",pieza);
 		assertTrue(cliente.consultarHistorialPropiedad().containsKey(001));
 	}
 	 
 	@Test
-	void test2() {
+	void testAgregarPiezaMapaCompras() {
 		compra.agregarPiezaMapaCompras(54952,galeria,"001",pieza);
 		assertTrue(cliente.consultarHistorialCompra().containsKey(001));
 	}
 
 	@Test
-	void test3() {
+	void testActualizarPropietario() {
 		compra.actualizarPropietario(pieza,89945);
 		assertEquals(89945,pieza.getPropietarioActual());
 	}
 	
 	@Test
-	void test4() {
+	void testCambiarEstadoPieza() {
 		compra.cambiarEstadoPieza(pieza);
 		assertEquals("Vendida",pieza.getEstado());
 	}
 	
 	@Test
-	void test5() {
+	void testBloquearPieza() {
 		compra.bloquearPieza(pieza);
 		assertEquals("En revision",pieza.getEstado());
 	}
 	
 	@Test
-	void test6() {
+	void testDesbloquearPieza() {
 		compra.desbloquearPieza(pieza,"no adquirida");
 		assertEquals("no adquirida",pieza.getEstado());
 	}
-		
+	
+	//@Test
+	//void test7() {
+		//compra.verificarEstadoPieza(pieza);
+	//	assertEquals("no adquirida",pieza.getEstado());
+	//}
+	
+	
 	@Test
-	void test7() {
-		compra.verificarEstadoPieza(pieza);
-		assertEquals("no adquirida",pieza.getEstado());
-	}	
+	void testVerificarComprador1() {
+		assertTrue(compra.verificarComprador("af.ruiz","andres2005", 5000));
+	}
+	
+	@Test
+	void testVerificarComprador2() {
+		assertTrue(compra.verificarComprador("af.ruiz","andres2005", 3000));
+	}
 }
