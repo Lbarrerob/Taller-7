@@ -13,6 +13,7 @@ import central.Galeria;
 import inventario.ObraDeArte;
 import inventario.Video;
 import transacciones.Compra;
+import usuarios.Artista;
 import usuarios.Cliente;
 
 class TransaccionTest {
@@ -22,18 +23,20 @@ class TransaccionTest {
 	private Date fecha;
 	private Cliente cliente;
 	private Galeria galeria;
+	private Artista autor;
 	
 	@BeforeEach
 	public void setUp() throws Exception {
-		
+		fecha = new Date();
 		ArrayList<String> reparto = new ArrayList<String>();
 	    reparto.add("Leonardo DiCaprio");
 	    reparto.add("Bruce Willis");
 	    reparto.add("Ryan Reynolds");
 	    reparto.add("Elton Jhon");
-		pieza = new Video(001,"Video","Silliness",1988,"Francia","Francois Caraballo",true,"en venta",
-				30000,false,55903,"Juan Reyes","Enrique Segoviano",reparto,"Frances",1205); 
-		fecha = new Date();
+	    autor = new Artista("Juan valencia",4654865,310284648,"jm.valencia58@hotmail.com","juanmvalencia26","toby456");
+	    
+		pieza = new Video(001,"Video","Silliness",1988,"Francia",autor,true,"en venta", 30000,false,55903,fecha,fecha,"Juan Reyes","Enrique Segoviano",reparto,"Frances",1205); 
+
 		compra = new Compra(fecha, fecha,54952);
 		
 		galeria = new Galeria();
@@ -83,4 +86,9 @@ class TransaccionTest {
 		assertEquals("no adquirida",pieza.getEstado());
 	}
 		
+	@Test
+	void test7() {
+		compra.verificarEstadoPieza(pieza);
+		assertEquals("no adquirida",pieza.getEstado());
+	}	
 }
