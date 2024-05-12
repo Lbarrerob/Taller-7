@@ -63,7 +63,7 @@ class SubastaTest {
 
 	@Test
 	void testVerificarOferta() {
-		assertTrue(subasta.verificarOferta(subasta ,pieza, 456151));
+		assertTrue(subasta.verificarOferta(subasta, 456151));
 	}
 
 }
