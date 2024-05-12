@@ -395,7 +395,7 @@ public class Galeria implements Serializable
 	}
 	
 	
-	public String ofertarPiezas(String codigosRegistro, int oferta, int identificacion, Date fecha, String tipoPago, double limiteFecha, Empleado empleado, Galeria galeria) {
+	public String ofertarPiezas(String codigosRegistro, int oferta, int identificacion, Date fecha, String tipoPago, double limiteFecha, Empleado empleado, Galeria galeria, int valor_minimo) {
 	    String ans = "";
 	    String[] codigos = codigosRegistro.split(", ");
 	    String tipoSolicitud = "Subasta";
@@ -407,14 +407,14 @@ public class Galeria implements Serializable
 
 	    for (String codigo : codigos) {
 	        ObraDeArte pieza = piezas.get(Integer.parseInt(codigo));
-	        Subasta subasta = new Subasta(fecha, fecha, identificacion);
+	        Subasta subasta = new Subasta(fecha, fecha, identificacion,pieza,valor_minimo);
 
 	        if (subasta.verificarEstadoPieza(tipoSolicitud)) {
 	            Cliente clienteBuscado = clientes.get(identificacion);
 	            String login = clienteBuscado.getLogin();
 	            String password = clienteBuscado.getPassword();
 	            if (subasta.verificarComprador(login, password, limiteFecha)) {
-	                if (subasta.verificarOferta(subasta, pieza, oferta)) {
+	                if (subasta.verificarOferta(subasta, oferta)) {
 	                    Pago pago = new Pago(tipoPago, pieza.getValor(), identificacion, Integer.parseInt(codigo));
 	                    empleado.registrarPago(pago);
 	                    subasta.actualizarPropietario(pieza, identificacion);

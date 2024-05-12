@@ -44,7 +44,7 @@ class SubastaTest {
 	    
 		pieza = new Video(001,"Video","Silliness",1988,"Francia",autor,true,"en venta", 30000,false,55903,fecha,fecha,"Juan Reyes","Enrique Segoviano",reparto,"Frances",1205); 
 
-		subasta = new Subasta(fecha, fecha,54952);
+		subasta = new Subasta(fecha, fecha,54952,pieza,40000);
 		
 		galeria = new Galeria();
 		
