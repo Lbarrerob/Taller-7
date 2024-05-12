@@ -1,4 +1,24 @@
-class TransaccionTest {
+package tests;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import central.Galeria;
+import inventario.ObraDeArte;
+import inventario.Video;
+import transacciones.Compra;
+import usuarios.Artista;
+import usuarios.Cliente;
+
+class CompraTest {
 	
 	private Compra compra;
 	private ObraDeArte pieza; 
@@ -82,6 +102,15 @@ class TransaccionTest {
 	
 	@Test
 	void testVerificarComprador2() {
-		assertTrue(compra.verificarComprador("af.ruiz","andres2005", 3000));
+		assertFalse(compra.verificarComprador("af.ruiz","andres2005", 3000));
+	}
+	@Test
+	void testAprobarCompra() {
+		assertTrue(compra.aprobarCompra());
+	}
+	
+	@Test
+	void testAprobarCompra2() {
+		assertTrue(compra.aprobarCompra());
 	}
 }

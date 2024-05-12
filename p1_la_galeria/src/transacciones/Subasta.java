@@ -22,11 +22,7 @@ public class Subasta extends Transaccion
 	private HashMap<Integer, ObraDeArte> solicitudCompra;
 	private HashMap<Integer, ObraDeArte> solicitudSubasta;
 	
-	//especificos
-	
-	private int valor_inicial;
-	private int valor_minimo;
-	
+		
 	//constructor
 	public Subasta(Date fechaSolicitud, Date fechaAprobacion, int comprador) 
 	{
@@ -82,16 +78,7 @@ public class Subasta extends Transaccion
 		return super.getSolicitudSubasta();
 	}
 	
-	public int getValor_inicial() {
-		return valor_inicial;
-	}
-
-
-	public int getValor_minimo() {
-		return valor_minimo;
-	}
-	
-	public boolean  verificarOferta(Subasta subasta, int oferta) {
-		 return subasta.getValor_inicial()<oferta && oferta>subasta.getValor_minimo();
+	public boolean  verificarOferta(Subasta subasta, ObraDeArte pieza, int oferta) {
+		 return pieza.getValor_inicial()<oferta && oferta>pieza.getValor_minimo();
 	 }
 }

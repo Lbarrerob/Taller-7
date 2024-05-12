@@ -3,7 +3,6 @@ package inventario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-
 import usuarios.Artista;
 
 public abstract class ObraDeArte implements Serializable
@@ -27,6 +26,8 @@ public abstract class ObraDeArte implements Serializable
 	private Date fechaVenta;
 	private Date fechaIngreso;
 	private ArrayList<Integer> historialPropietarios;
+	private int valor_inicial;
+	private int valor_minimo;
 
 	
 	//constructor
@@ -118,6 +119,14 @@ public abstract class ObraDeArte implements Serializable
 
 	public ArrayList<Integer> getHistorialPropietarios() {
 		return historialPropietarios;
+	}
+
+	public int getValor_inicial() {
+		return valor_inicial;
+	}
+
+	public int getValor_minimo() {
+		return valor_minimo;
 	}
 	
 	public ArrayList<Integer> setHistorialPropietarios() {

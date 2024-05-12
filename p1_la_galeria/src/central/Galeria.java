@@ -414,7 +414,7 @@ public class Galeria implements Serializable
 	            String login = clienteBuscado.getLogin();
 	            String password = clienteBuscado.getPassword();
 	            if (subasta.verificarComprador(login, password, limiteFecha)) {
-	                if (subasta.verificarOferta(subasta, oferta)) {
+	                if (subasta.verificarOferta(subasta, pieza, oferta)) {
 	                    Pago pago = new Pago(tipoPago, pieza.getValor(), identificacion, Integer.parseInt(codigo));
 	                    empleado.registrarPago(pago);
 	                    subasta.actualizarPropietario(pieza, identificacion);
