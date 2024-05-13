@@ -16,39 +16,25 @@ public abstract class Transaccion implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	//atributos
-	private Date fechaSolicitud;
+
 	private Date fechaAprobacion;
-	private int comprador;
 	private HashMap<Integer, Usuario> Empleados;
 	private HashMap<Integer, Usuario> Clientes;
-	private HashMap<String, ObraDeArte> solicitudCompra;
-	private HashMap<String, ObraDeArte> solicitudSubasta;
 	
 	
 	//constructor
-	public Transaccion (Date fechaSolicitud, Date fechaAprobacion, int comprador)
+	public Transaccion (Date fechaAprobacion)
 	{
-		this.fechaSolicitud = fechaSolicitud;
 		this.fechaAprobacion = fechaAprobacion;
-		this.comprador = comprador;
 		this.Empleados = new HashMap<Integer, Usuario>( );
 		this.Clientes = new HashMap<Integer, Usuario>( );
-		this.solicitudCompra = new HashMap<String, ObraDeArte>( );
-		this.solicitudSubasta = new HashMap<String, ObraDeArte>( );
-	}
 
+	}
 	
 	//Métodos getters
-	public Date getFechaSolicitud() {
-		return fechaSolicitud;
-	}
 
 	public Date getFechaAprobacion() {
 		return fechaAprobacion;
-	}
-
-	public int getComprador() {
-		return comprador;
 	}
 
 	public HashMap<Integer, Usuario> getEmpleados() {
@@ -58,36 +44,9 @@ public abstract class Transaccion implements Serializable
 	public HashMap<Integer, Usuario> getClientes() {
 		return Clientes;
 	}
-
-	public HashMap<String, ObraDeArte> getSolicitudCompra() {
-		return solicitudCompra;
-	}
-
-	public HashMap<String, ObraDeArte> getSolicitudSubasta() {
-		return solicitudSubasta;
-	}
 	
 	
 	//Métodos específicos
-	
-	public boolean verificarEstadoPieza (String tipoSolicitud)
-	
-	{
-		HashMap<String, ObraDeArte> listaSolicitud = tipoSolicitud.equals("venta") ? solicitudCompra : tipoSolicitud.equals("subasta") ? solicitudSubasta : null;
-
-	    if (listaSolicitud == null) 
-	    {
-	        return false; 
-	    }
-
-	    for (ObraDeArte obra : listaSolicitud.values()) {
-	        if ((tipoSolicitud.equals("Compra") && !obra.getEstado().equals("En venta")) ||
-	            (tipoSolicitud.equals("Subasta") && !obra.getEstado().equals("En subasta"))) {
-	            return false;
-	        }
-	    }
-	    return true;
-	}
 	
 	
 	public void agregarPiezaMapaPropiedades(int idCliente, Galeria galeria, String codigoRegistro, ObraDeArte pieza) 

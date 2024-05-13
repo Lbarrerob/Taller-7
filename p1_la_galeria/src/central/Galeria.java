@@ -198,6 +198,15 @@ public class Galeria implements Serializable
 	    return null; // Retornar null si no se encuentra ningún empleado con esa identificación
 	}
 	
+	public Empleado obtenerAdministradorPorIdentificacion(int identificacion) {
+	    for (Empleado empleado : empleados) {
+	        if (empleado.getIdentificacion() == identificacion && empleado.getTipo().equals("Administrador")) {
+	            return empleado;
+	        }
+	    }
+	    return null;
+	}
+	
 	public ArrayList<ObraDeArte> obtenerObrasPorCodigos(String codigos) {
         ArrayList<ObraDeArte> obras = new ArrayList<>();
         String[] codigoArray = codigos.split(",");
@@ -470,7 +479,7 @@ public class Galeria implements Serializable
 
 	    for (String codigo : codigos) {
 	        ObraDeArte pieza = piezas.get(Integer.parseInt(codigo));
-	        Subasta subasta = new Subasta(fecha, fecha, identificacion,pieza,valor_minimo);
+	        Subasta subasta = new Subasta(fecha, identificacion,pieza,valor_minimo);
 
 	        if (subasta.verificarEstadoPieza(tipoSolicitud)) {
 	            Cliente clienteBuscado = clientes.get(identificacion);

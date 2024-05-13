@@ -15,6 +15,7 @@ public class Artista implements Serializable
 	private String nombre;
 
     public Artista(String nombre) {
+    	this.nombre = nombre;
         this.piezasCreadas = new ArrayList<>();
     }
 

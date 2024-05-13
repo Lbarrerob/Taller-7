@@ -16,48 +16,37 @@ public class Compra extends Transaccion
 	 */
 	private static final long serialVersionUID = 1L;
 	//heredados
-	private Date fechaSolicitud;
+
 	private Date fechaAprobacion;
 	private int comprador;
 	private HashMap<Integer, Usuario> Empleados;
 	private HashMap<Integer, Usuario> Clientes;
 	private HashMap<Integer, ObraDeArte> solicitudCompra;
-	private HashMap<Integer, ObraDeArte> solicitudSubasta;
 	private HashMap<Integer, ObraDeArte> obrasCompradas;
 		
 	
 	//constructor
-	public Compra(Date fechaSolicitud, Date fechaAprobacion, int comprador) 
+	public Compra(Date fechaAprobacion, int comprador) 
 	{
-		super(fechaSolicitud, fechaAprobacion, comprador);
+		super(fechaAprobacion);
 		// TODO Auto-generated constructor stub
+		this.comprador = comprador;
 		this.Empleados = new HashMap<Integer, Usuario>( );
 		this.Clientes = new HashMap<Integer, Usuario>( );
 		this.solicitudCompra = new HashMap<Integer, ObraDeArte>( );
-		this.solicitudSubasta = new HashMap<Integer, ObraDeArte>( );
 		this.obrasCompradas = new HashMap<>();
 	}
 
 
 	//Métodos getters
 	
-	@Override
-	public Date getFechaSolicitud() {
-		// TODO Auto-generated method stub
-		return super.getFechaSolicitud();
-	}
 
 	@Override
 	public Date getFechaAprobacion() {
 		// TODO Auto-generated method stub
 		return super.getFechaAprobacion();
 	}
-
-	@Override
-	public int getComprador() {
-		// TODO Auto-generated method stub
-		return super.getComprador();
-	}
+	
 
 	@Override
 	public HashMap<Integer, Usuario> getEmpleados() {
@@ -71,18 +60,16 @@ public class Compra extends Transaccion
 		return super.getClientes();
 	}
 
-	@Override
 	public HashMap<String, ObraDeArte> getSolicitudCompra() {
-		// TODO Auto-generated method stub
-		return super.getSolicitudCompra();
+		return getSolicitudCompra();
 	}
 
-	@Override
-	public HashMap<String, ObraDeArte> getSolicitudSubasta() {
-		// TODO Auto-generated method stub
-		return super.getSolicitudSubasta();
-	}
     
+	public int getComprador() {
+		return comprador;
+	}
+
+
 	public boolean verificarCompra() {
 	    double totalCompra = 0.0;
 	    for (Map.Entry<Integer, ObraDeArte> entry : solicitudCompra.entrySet()) {
@@ -114,4 +101,25 @@ public class Compra extends Transaccion
     public ObraDeArte getPiezaComprada(int codigoRegistro) {
         return obrasCompradas.get(codigoRegistro);
     }
+    
+    
+	public boolean verificarEstadoPieza (String tipoSolicitud)
+	
+	{
+		HashMap<String, ObraDeArte> listaSolicitud = tipoSolicitud.equals("venta") ? solicitudCompra : tipoSolicitud.equals("subasta") ? solicitudSubasta : null;
+
+	    if (listaSolicitud == null) 
+	    {
+	        return false; 
+	    }
+
+	    for (ObraDeArte obra : listaSolicitud.values()) {
+	        if ((tipoSolicitud.equals("Compra") && !obra.getEstado().equals("En venta")) ||
+	            (tipoSolicitud.equals("Subasta") && !obra.getEstado().equals("En subasta"))) {
+	            return false;
+	        }
+	    }
+	    return true;
+	
+	    
 }
