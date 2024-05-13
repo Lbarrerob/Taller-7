@@ -15,7 +15,7 @@ import central.Galeria;
 import inventario.ObraDeArte;
 import inventario.Video;
 import transacciones.Compra;
-import usuarios.Artista;
+import central.Artista;
 import usuarios.Cliente;
 
 class CompraTest {

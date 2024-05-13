@@ -17,7 +17,7 @@ import java.util.Map;
 import transacciones.Compra;
 import transacciones.Pago;
 import transacciones.Subasta;
-import usuarios.Artista;
+import central.Artista;
 import usuarios.Cliente;
 import usuarios.Empleado;
 import usuarios.Usuario;

@@ -1,4 +1,4 @@
-package usuarios;
+package central;
 
 import java.io.Serializable;
 import java.util.ArrayList;

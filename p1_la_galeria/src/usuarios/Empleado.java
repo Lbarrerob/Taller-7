@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import central.Artista;
 import inventario.ObraDeArte;
 import transacciones.Compra;
 import transacciones.Pago;

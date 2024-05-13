@@ -3,7 +3,7 @@ package inventario;
 import java.util.ArrayList;
 import java.util.Date;
 
-import usuarios.Artista;
+import central.Artista;
 
 @SuppressWarnings("unused")
 public class Video extends ObraDeArte

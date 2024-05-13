@@ -5,7 +5,7 @@ import inventario.ObraDeArte;
 
 import java.util.ArrayList;
 import java.util.Date;
-import usuarios.Artista;
+import central.Artista;
 import usuarios.Cliente;
 import usuarios.Empleado;
 
