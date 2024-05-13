@@ -1,15 +1,12 @@
 package tests;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
+
 
 import central.Galeria;
 import inventario.ObraDeArte;
@@ -39,7 +36,7 @@ class CompraTest {
 	    
 		pieza = new Video(001,"Video","Silliness",1988,"Francia",autor,true,"en venta", 30000,false,55903,fecha,fecha,"Juan Reyes","Enrique Segoviano",reparto,"Frances",1205); 
 
-		compra = new Compra(fecha, fecha,54952);
+		compra = new Compra(fecha,54952);
 		
 		galeria = new Galeria();
 		

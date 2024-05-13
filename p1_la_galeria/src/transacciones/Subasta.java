@@ -41,22 +41,11 @@ public class Subasta extends Transaccion
 	//metodos
 	
 	@Override
-	public Date getFechaSolicitud() {
-		// TODO Auto-generated method stub
-		return super.getFechaSolicitud();
-	}
-	
-	@Override
 	public Date getFechaAprobacion() {
 		// TODO Auto-generated method stub
 		return super.getFechaAprobacion();
 	}
 
-	@Override
-	public int getComprador() {
-		// TODO Auto-generated method stub
-		return super.getComprador();
-	}
 
 	@Override
 	public HashMap<Integer, Usuario> getEmpleados() {
@@ -70,16 +59,12 @@ public class Subasta extends Transaccion
 		return super.getClientes();
 	}
 
-	@Override
 	public HashMap<String, ObraDeArte> getSolicitudCompra() {
-		// TODO Auto-generated method stub
-		return super.getSolicitudCompra();
+		return getSolicitudCompra();
 	}
 
-	@Override
 	public HashMap<String, ObraDeArte> getSolicitudSubasta() {
-		// TODO Auto-generated method stub
-		return super.getSolicitudSubasta();
+		return getSolicitudSubasta();
 	}
 	
 	public void setPieza(ObraDeArte pieza) {

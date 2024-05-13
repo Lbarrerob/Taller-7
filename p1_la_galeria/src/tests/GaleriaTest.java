@@ -25,16 +25,13 @@ class Galeria1Test {
 
 	private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
-	private Compra compra;
 	private ObraDeArte pieza1; 
 	private ObraDeArte pieza2;
 	private Date fecha;
-	private Cliente cliente;
 	private Empleado empleado;
 	private Galeria galeria;
 	private Artista autor;
     private String codigosRegistro;
-    private int codigo_registro;
     private HashMap<Integer, ObraDeArte> mapaPiezas;
 	
 	@BeforeEach
@@ -66,7 +63,7 @@ class Galeria1Test {
 		galeria.IngresarVideoConsignacion(fecha, "Silliness",1988,"Francia",autor,true,"en venta", 30000,false,55903,fecha,
 				"Juan Reyes","Enrique Segoviano",reparto,"Frances",1205);
 		
-		compra = new Compra(fecha, fecha,54952);
+		Compra compra = new Compra(fecha, 54952);
 				
 		galeria.registrarCliente("Luis Rodriguez",54952,31429257,"luis26@gmail.com","le.rodriguez","hollow278",3500,7000	);
 		
@@ -74,7 +71,7 @@ class Galeria1Test {
 		
 		galeria.registrarEmpleado("Steven Chavez",103215484,315945652,"steven_16@yahoo.com","steven.c","steven1995","Administrador");
 	
-		cliente = galeria.getClientesMap().get(54952);
+		Cliente cliente = galeria.getClientesMap().get(54952);
 		
 		empleado = new Empleado("Steven Chavez",103215484,315945652,"steven_16@yahoo.com","steven.c","steven1995","Administrador");
 		

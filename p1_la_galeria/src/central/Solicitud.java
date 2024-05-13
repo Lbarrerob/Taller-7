@@ -9,7 +9,6 @@ public class Solicitud
 {
 	//atributos
 	private Date fechaSolicitud;
-	private String tipoSolicitud; //compra o subasta
 	private String tipoPago; //efectivo o transferencia
 	private int comprador; //identificación del cliente que crea la solicitud
 	private HashMap<Integer, ObraDeArte> solicitudPiezas; //K:codRegistroPieza - V:pieza
@@ -18,10 +17,9 @@ public class Solicitud
 	
 	
 	//constructor
-	public Solicitud (Date fechaSolicitud, String tipoSolicitud, String tipoPago, int comprador) 
+	public Solicitud (Date fechaSolicitud, String tipoPago, int comprador) 
 	{
 		this.fechaSolicitud = fechaSolicitud;
-		this.tipoSolicitud = tipoSolicitud;
 		this.tipoPago = tipoPago;
 		this.comprador = comprador;
 		this.solicitudPiezas = new HashMap<Integer, ObraDeArte>( );
@@ -31,10 +29,6 @@ public class Solicitud
 	//metodos
 	public String getTipoPago() {
 		return tipoPago;
-	}
-
-	public String getTipoSolicitud() {
-		return tipoSolicitud;
 	}
 
 	public Date getFechaSolicitud() {

@@ -11,11 +11,11 @@ public class Pago implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	private String tipoPago;
-	private int valor;
+	private double valor;
 	private int identificacion_cliente;
 	private int codigoRegistro;
 
-	public Pago(String tipoPago, int valor, int identificacion_cliente, int codigoRegistro) {
+	public Pago(String tipoPago, double valor, int identificacion_cliente, int codigoRegistro) {
 		super();
 		this.tipoPago = tipoPago;
 		this.valor = valor;
@@ -30,7 +30,7 @@ public class Pago implements Serializable
 	public void setTipoPago(String tipoPago) {
 		this.tipoPago = tipoPago;
 	}
-	public int getValor() {
+	public double getValor() {
 		return valor;
 	}
 	

@@ -21,6 +21,7 @@ import central.Artista;
 import usuarios.Cliente;
 import usuarios.Empleado;
 import usuarios.Usuario;
+import java.time.LocalDate;
 
 public class Galeria implements Serializable
 {
@@ -348,20 +349,6 @@ public class Galeria implements Serializable
 	}
 	
 	
-	public void eliminarPiezaConsignacion(ObraDeArte pieza) 
-	{
-        Date fechaLimite = calcularFechaDevolucion(pieza.getFechaIngreso()); // Calcula la fecha límite
-        Iterator<Map.Entry<Integer, ObraDeArte>> iterator = piezas.entrySet().iterator();
-        while (iterator.hasNext()) {
-            Map.Entry<Integer, ObraDeArte> entry = iterator.next();
-            ObraDeArte obra = entry.getValue();
-            if (obra.equals(pieza) && obra.getFechaIngreso().before(fechaLimite)) {
-                iterator.remove();
-            }
-        }
-    }
-	
-	
 	private Usuario buscarUsuario(String login, String password) 
 	{
 		for (Usuario usuario : empleados) {
@@ -379,15 +366,15 @@ public class Galeria implements Serializable
 	}
 	
 	
-	public void accederSistema (String login, String password)
-	{
-		Usuario usuario = buscarUsuario(login, password);
-		if(usuario != null){
-			System.out.println("Bienvenido " + usuario.getNombre() + ", ha accedido al sistema.");
-			
-		} else {
-			System.out.println("Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.");
-		}
+	public boolean accederSistema(String login, String password) {
+	    Usuario usuario = buscarUsuario(login, password);
+	    if (usuario != null) {
+	        System.out.println("Bienvenido " + usuario.getNombre() + ", ha accedido al sistema.");
+	        return true;
+	    } else {
+	        System.out.println("Usuario o contraseña incorrectos. Por favor, inténtelo de nuevo.");
+	        return false;
+	    }
 	}
 	
 	public boolean verificarComprador(String login, String password, double limiteCompra) {
@@ -410,6 +397,7 @@ public class Galeria implements Serializable
 	    return null;
 	}
 	
+	
 	public boolean verificarEmpleado(String login, String password) {
 	    Empleado empleado = buscarEmpleadoPorLogin(login);
 	    return empleado != null && empleado.verificarLogin(login, password);
@@ -424,6 +412,24 @@ public class Galeria implements Serializable
 	    return null;
 	}
 	
+	public String verificarUsuario(String login, String password) {
+	    // Buscar en la lista de clientes
+	    for (Cliente cliente : clientes) {
+	        if (cliente.getLogin().equals(login) && cliente.getPassword().equals(password)) {
+	            return "cliente";
+	        }
+	    }
+
+	    // Buscar en la lista de empleados
+	    for (Empleado empleado : empleados) {
+	        if (empleado.getLogin().equals(login) && empleado.getPassword().equals(password)) {
+	            return "empleado";
+	        }
+	    }
+
+	    return null; // Credenciales no encontradas
+	}
+	
 	
 	public String comprarPiezas(String codigosRegistro, int identificacion, Date fecha, String tipoPago, Empleado empleado, Galeria galeria, HashMap<Integer, ObraDeArte> mapaPiezas) {
 	    String ans = "";
@@ -431,13 +437,13 @@ public class Galeria implements Serializable
 	    String tipoSolicitud = "Compra";
 
 	    // Crear una solicitud para el cliente
-	    Solicitud solicitud = new Solicitud(fecha, tipoSolicitud, tipoPago, identificacion);
+	    Solicitud solicitud = new Solicitud(fecha, tipoPago, identificacion);
 	    // Asociar las piezas solicitadas con la solicitud y el cliente
 	    solicitud.crearSolicitudPiezas(codigosRegistro, identificacion);
 
 	    for (String codigo : codigos) {
 	        ObraDeArte pieza = mapaPiezas.get(Integer.parseInt(codigo));
-	        Compra compra = new Compra(fecha, fecha, identificacion);
+	        Compra compra = new Compra(fecha,identificacion);
 	        String estado_inicial = pieza.getEstado();
 
 	        if (compra.verificarEstadoPieza(tipoSolicitud)) {
@@ -473,7 +479,7 @@ public class Galeria implements Serializable
 	    String tipoSolicitud = "Subasta";
 
 	    // Crear una solicitud para el cliente
-	    Solicitud solicitud = new Solicitud(fecha, tipoSolicitud, tipoPago, identificacion);
+	    Solicitud solicitud = new Solicitud(fecha, tipoPago, identificacion);
 	    // Asociar las piezas ofertadas con la solicitud y el cliente
 	    solicitud.crearSolicitudPiezas(codigosRegistro, identificacion);
 

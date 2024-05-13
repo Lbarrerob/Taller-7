@@ -1,13 +1,14 @@
 package consola;
 
 import central.Galeria;
+import usuarios.Empleado;
 
 public class ConsolaPrincipal extends ConsolaBasica 
 {
 
 	//Atributos
 	
-	 private final String[] opcionesMenuPrincipal = new String[] {"Registrar nuevo empleado", "Registrar nuevo cliente", "Acceder al sistema de la galería", "Salir"};
+	private final String[] opcionesMenuPrincipal = new String[] {"Registrar nuevo empleado", "Registrar nuevo cliente", "Acceder al sistema de la galería", "Salir"};
 	 
 	 
 	 //Métodos
@@ -74,7 +75,7 @@ public class ConsolaPrincipal extends ConsolaBasica
 		 
 		 galeria.registrarCliente(nombre, identificacion, telefono, correo, login, password, ingreso, limiteCompra);
 		 
-		 System.out.println("El cliente se resgistró correctamente.");
+		 System.out.println("El cliente se registró correctamente.");
 	 }
 	 
 	 public void accederSistema()
@@ -84,7 +85,59 @@ public class ConsolaPrincipal extends ConsolaBasica
 		 String login = pedirCadenaAlUsuario("Indique su nombre de usuario con el que ingresará al sistema de la galería: ");
 		 String password = pedirCadenaAlUsuario("Indique una contraseña con la que ingresará al sistema de la galería, esta debe ser de mínimo 5 dígitos: ");
 
-		 galeria.accederSistema(login, password);
+		 boolean sistema = galeria.accederSistema(login, password);
+		 
+		 
+		 String tipoUsuario = galeria.verificarUsuario(login, password);
+		 
+		 if (tipoUsuario != null) {
+		        switch (tipoUsuario) {
+		            case "cliente":
+		            	ConsolaCliente consolaCliente = new ConsolaCliente();
+		                consolaCliente.mostrarMenuPrincipal();
+		                break;
+		                
+		            case "empleado":
+		            	
+		            	Empleado empleadoEncontrado = null;
+		                for (Empleado empleado : galeria.consultarEmpleados()) {
+		                    if (empleado.getLogin().equals(login) && empleado.getPassword().equals(password)) {
+		                        empleadoEncontrado = empleado;
+		                        break;
+		                    }
+		                    
+		                }
+		       
+		                if (empleadoEncontrado == null) {
+		                        System.out.println("Credenciales incorrectas.");
+		                        return;
+		                }
+
+		                if (empleadoEncontrado.getTipo().equals("Administrador")) {
+		                        
+		                        ConsolaAdministrador consolaAdministrador = new ConsolaAdministrador();
+				                consolaAdministrador.mostrarMenuPrincipal();
+		                }
+
+		                if (empleadoEncontrado.getTipo().equals("Operador")) {
+		                        
+		                        ConsolaOperador consolaOperador = new ConsolaOperador();
+				                consolaOperador.mostrarMenuPrincipal();
+				                
+		                }
+
+		                if (empleadoEncontrado.getTipo().equals("Cajero")) {
+		                        
+		                        ConsolaCajero consolaCajero = new ConsolaCajero();
+				                consolaCajero.mostrarMenuPrincipal();
+		                }
+		                    
+		                default:
+		                    System.out.println("Tipo de usuario no válido.");
+		        }
+		    } else {
+		        System.out.println("Credenciales incorrectas.");
+		    }
 	}
 	 
 

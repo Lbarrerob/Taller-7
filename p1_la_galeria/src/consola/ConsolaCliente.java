@@ -62,7 +62,7 @@ public class ConsolaCliente extends ConsolaBasica
 		     int identificacionEmpleado = pedirEnteroAlUsuario("Ingrese el identificador del empleado que lo está atendiendo:  ");
 		     Empleado empleado = galeria.obtenerEmpleadoPorIdentificacion(identificacionEmpleado);
 
-		     String resultado = galeria.comprarPiezas(codigosRegistro, identificacion, fecha, tipoPago, empleado, galeria);
+		     String resultado = galeria.comprarPiezas(codigosRegistro, identificacion, fecha, tipoPago, empleado, galeria, null);
 		     System.out.println(resultado);	 
 		 
 		 }

@@ -110,13 +110,13 @@ public class ConsolaAdministrador extends ConsolaBasica
 	 
 	 public void verificarCompra()
 	 {
-		 
+		 //Todo 
 	 }
 	 
 	 
 	 public void verificarOferta()
 	 {
-		 
+		 //Todo
 	 }
 	 
 	 

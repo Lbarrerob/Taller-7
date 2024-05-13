@@ -102,24 +102,5 @@ public class Compra extends Transaccion
         return obrasCompradas.get(codigoRegistro);
     }
     
-    
-	public boolean verificarEstadoPieza (String tipoSolicitud)
-	
-	{
-		HashMap<String, ObraDeArte> listaSolicitud = tipoSolicitud.equals("venta") ? solicitudCompra : tipoSolicitud.equals("subasta") ? solicitudSubasta : null;
-
-	    if (listaSolicitud == null) 
-	    {
-	        return false; 
-	    }
-
-	    for (ObraDeArte obra : listaSolicitud.values()) {
-	        if ((tipoSolicitud.equals("Compra") && !obra.getEstado().equals("En venta")) ||
-	            (tipoSolicitud.equals("Subasta") && !obra.getEstado().equals("En subasta"))) {
-	            return false;
-	        }
-	    }
-	    return true;
-	
-	    
+     
 }

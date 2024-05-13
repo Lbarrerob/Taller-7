@@ -21,14 +21,12 @@ import central.Artista;
 import usuarios.Cliente;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Test;
 
 class SubastaTest {
 
 	private Subasta subasta;
 	private ObraDeArte pieza; 
 	private Date fecha;
-	private Cliente cliente;
 	private Galeria galeria;
 	private Artista autor;
 	
@@ -40,7 +38,7 @@ class SubastaTest {
 	    reparto.add("Bruce Willis");
 	    reparto.add("Ryan Reynolds");
 	    reparto.add("Elton Jhon");
-	    autor = new Artista("Juan valencia",4654865,310284648,"jm.valencia58@hotmail.com","juanmvalencia26","toby456");
+	    autor = new Artista("Juan valencia");
 	    
 		pieza = new Video(001,"Video","Silliness",1988,"Francia",autor,true,"en venta", 30000,false,55903,fecha,fecha,"Juan Reyes","Enrique Segoviano",reparto,"Frances",1205); 
 
@@ -54,7 +52,7 @@ class SubastaTest {
 		galeria.registrarCliente("Andres Ruiz",89945,31148132,"anresr5@gmail.com","af.ruiz",
 				"andres2005",4000,10000	);
 	
-		cliente = galeria.getClientesMap().get(54952);
+		Cliente cliente = galeria.getClientesMap().get(54952);
 	}
 	
 	@AfterEach
