@@ -21,20 +21,15 @@ public abstract class Transaccion implements Serializable
 	private int comprador;
 	private HashMap<Integer, Usuario> Empleados;
 	private HashMap<Integer, Usuario> Clientes;
-	private HashMap<String, ObraDeArte> solicitudCompra;
-	private HashMap<String, ObraDeArte> solicitudSubasta;
 	
 	
 	//constructor
-	public Transaccion (Date fechaSolicitud, Date fechaAprobacion, int comprador)
+	public Transaccion (Date fechaAprobacion)
 	{
-		this.fechaSolicitud = fechaSolicitud;
 		this.fechaAprobacion = fechaAprobacion;
-		this.comprador = comprador;
 		this.Empleados = new HashMap<Integer, Usuario>( );
 		this.Clientes = new HashMap<Integer, Usuario>( );
-		this.solicitudCompra = new HashMap<String, ObraDeArte>( );
-		this.solicitudSubasta = new HashMap<String, ObraDeArte>( );
+
 	}
 
 	
@@ -57,14 +52,6 @@ public abstract class Transaccion implements Serializable
 
 	public HashMap<Integer, Usuario> getClientes() {
 		return Clientes;
-	}
-
-	public HashMap<String, ObraDeArte> getSolicitudCompra() {
-		return solicitudCompra;
-	}
-
-	public HashMap<String, ObraDeArte> getSolicitudSubasta() {
-		return solicitudSubasta;
 	}
 	
 	

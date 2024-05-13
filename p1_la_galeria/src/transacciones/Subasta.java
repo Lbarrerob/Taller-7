@@ -28,8 +28,8 @@ public class Subasta extends Transaccion
 	//constructor
 	
 
-	public Subasta(Date fechaSolicitud, Date fechaAprobacion, int comprador, ObraDeArte pieza, int valor_minimo) {
-		super(fechaSolicitud, fechaAprobacion, comprador);
+	public Subasta( Date fechaAprobacion, int comprador, ObraDeArte pieza, int valor_minimo) {
+		super( fechaAprobacion);
 		this.pieza = pieza;
 		this.valor_minimo = valor_minimo;
 		this.Empleados = new HashMap<Integer, Usuario>( );

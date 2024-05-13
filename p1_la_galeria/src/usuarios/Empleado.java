@@ -26,6 +26,7 @@ public class Empleado extends Usuario
 	private String login;
 	private String password;
 	private ArrayList<Pago> pagosRealizados;
+	private ArrayList<ObraDeArte> piezas;
 	
 	//atributos
 	private String tipo; //Administrador, Operador, Cajero
@@ -99,6 +100,11 @@ public class Empleado extends Usuario
         pagosRealizados.add(pago);
     }
 	
+	public ArrayList<Pago> consultarHistorialPagosRealizados() 
+	{
+        return pagosRealizados;
+	}
+	
 	
 	public int determinarValorMinimoOferta(ArrayList<ObraDeArte> obras) {
 	    int totalValorMinimo = 0;
@@ -122,9 +128,9 @@ public class Empleado extends Usuario
 	}
 	
 	
-	public String verHistorialPieza(int codigoRegistro, ArrayList<ObraDeArte> obras) 
+	public String verHistorialPieza(int codigoRegistro) 
 	{
-	    for (ObraDeArte obra : obras) {
+	    for (ObraDeArte obra : piezas) {
 	        if (obra.getCodigoRegistro() == codigoRegistro) {
 	            StringBuilder sb = new StringBuilder();
 	            sb.append("Historial de la pieza con código de registro ").append(codigoRegistro).append(":\n");
@@ -155,18 +161,20 @@ public class Empleado extends Usuario
         for (ObraDeArte obra : artista.getPiezasCreadas()) {
             historial.append("Pieza: ").append(obra.getTitulo())
                     .append(", Fecha de creación: ").append(obra.getAnio())
-                    .append(", Estado: ").append(obra.getEstado())
-                    .append(", Precio de venta: ").append(obra.getValor()).append("\n");
+                    .append(", Fecha de venta: ").append(obra.getFechaVenta());
+                    if (obra.getEstado().equals("En subasta")) {
+                        historial.append(", Precio de venta: ").append(obra.getValor_minimo()).append("\n");
+                    } else {
+                        historial.append(", Precio de venta: ").append(obra.getValor()).append("\n");
+                    }
         }
-
         return historial.toString();
     }
 
 	
-	public void mostrarHistorialPropiedadCliente(Cliente cliente,  Empleado empleado) {
+	public String mostrarHistorialPropiedadCliente(Cliente cliente,  Empleado empleado) {
 		if (!empleado.getTipo().equals("Administrador")) {
-	        System.out.println("No tienes permiso para realizar esta acción.");
-	        return;
+	        return "No tienes permiso para realizar esta acción.";
 	    }
 
 	    StringBuilder stringBuilder = new StringBuilder();
@@ -193,7 +201,7 @@ public class Empleado extends Usuario
 	    }
 	    stringBuilder.append("Valor total de la colección: ").append(valorTotalColeccion);
 
-	    System.out.println(stringBuilder.toString());
+	    return stringBuilder.toString();
 	}
 }
 

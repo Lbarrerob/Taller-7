@@ -16,7 +16,7 @@ public class Compra extends Transaccion
 	 */
 	private static final long serialVersionUID = 1L;
 	//heredados
-	private Date fechaSolicitud;
+
 	private Date fechaAprobacion;
 	private int comprador;
 	private HashMap<Integer, Usuario> Empleados;
@@ -27,10 +27,11 @@ public class Compra extends Transaccion
 		
 	
 	//constructor
-	public Compra(Date fechaSolicitud, Date fechaAprobacion, int comprador) 
+	public Compra(Date fechaAprobacion, int comprador) 
 	{
-		super(fechaSolicitud, fechaAprobacion, comprador);
+		super(fechaAprobacion);
 		// TODO Auto-generated constructor stub
+		this.comprador = comprador;
 		this.Empleados = new HashMap<Integer, Usuario>( );
 		this.Clientes = new HashMap<Integer, Usuario>( );
 		this.solicitudCompra = new HashMap<Integer, ObraDeArte>( );
@@ -114,4 +115,25 @@ public class Compra extends Transaccion
     public ObraDeArte getPiezaComprada(int codigoRegistro) {
         return obrasCompradas.get(codigoRegistro);
     }
+    
+    
+	public boolean verificarEstadoPieza (String tipoSolicitud)
+	
+	{
+		HashMap<String, ObraDeArte> listaSolicitud = tipoSolicitud.equals("venta") ? solicitudCompra : tipoSolicitud.equals("subasta") ? solicitudSubasta : null;
+
+	    if (listaSolicitud == null) 
+	    {
+	        return false; 
+	    }
+
+	    for (ObraDeArte obra : listaSolicitud.values()) {
+	        if ((tipoSolicitud.equals("Compra") && !obra.getEstado().equals("En venta")) ||
+	            (tipoSolicitud.equals("Subasta") && !obra.getEstado().equals("En subasta"))) {
+	            return false;
+	        }
+	    }
+	    return true;
+	
+	    
 }

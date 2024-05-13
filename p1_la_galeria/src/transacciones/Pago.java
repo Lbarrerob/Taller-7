@@ -26,7 +26,13 @@ public class Pago implements Serializable
 	public String getTipoPago() {
 		return tipoPago;
 	}
+	
 	public void setTipoPago(String tipoPago) {
 		this.tipoPago = tipoPago;
 	}
+	public int getValor() {
+		return valor;
+	}
+	
+	
 }
