@@ -21,7 +21,6 @@ public abstract class Transaccion implements Serializable
 	private int comprador;
 	private HashMap<Integer, Usuario> Empleados;
 	private HashMap<Integer, Usuario> Clientes;
-	private HashMap<Integer, Cliente> Clientes1;
 	private HashMap<String, ObraDeArte> solicitudCompra;
 	private HashMap<String, ObraDeArte> solicitudSubasta;
 	
@@ -128,25 +127,6 @@ public abstract class Transaccion implements Serializable
 	public void desbloquearPieza (ObraDeArte pieza, String estado)
 	{
 		pieza.setEstado(estado);
-	}
-	
-	public boolean verificarComprador(String login, String password, double limiteCompra) {
-	    Cliente cliente = buscarClientePorLogin(login);
-	    if (cliente != null && cliente.verificarLogin(login, password)) {
-	        if (limiteCompra >= cliente.getIngreso()) {
-	            return true;
-	        }
-	    }
-	    return false;
-	}
-
-	private Cliente buscarClientePorLogin(String login) {
-	    for (Usuario cliente : Clientes.values()) {
-	        if (cliente instanceof Cliente && cliente.getLogin().equals(login)) {
-	            return (Cliente) cliente;
-	        }
-	    }
-	    return null;
 	}
 
 }
