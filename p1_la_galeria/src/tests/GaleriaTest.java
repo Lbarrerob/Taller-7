@@ -17,7 +17,7 @@ import central.Galeria;
 import inventario.ObraDeArte;
 import inventario.Video;
 import transacciones.Compra;
-import usuarios.Artista;
+import central.Artista;
 import usuarios.Cliente;
 import usuarios.Empleado;
 
@@ -50,7 +50,7 @@ class Galeria1Test {
 	    reparto.add("Ryan Reynolds");
 	    reparto.add("Elton Jhon");
 	    
-	    autor = new Artista("Juan valencia",4654865,310284648,"jm.valencia58@hotmail.com","juanmvalencia26","toby456");
+	    autor = new Artista("Juan valencia");
 	    
 		pieza1 = new Video(001,"Video","Silliness",1988,"Francia",autor,true,"en venta", 30000,false,55903,fecha,fecha,
 				"Juan Reyes","Enrique Segoviano",reparto,"Frances",1205); 
