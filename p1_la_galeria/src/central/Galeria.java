@@ -373,7 +373,7 @@ public class Galeria implements Serializable
 	}
 	
 	
-	public String comprarPiezas(String codigosRegistro, int identificacion, Date fecha, String tipoPago, Empleado empleado, Galeria galeria) {
+	public String comprarPiezas(String codigosRegistro, int identificacion, Date fecha, String tipoPago, Empleado empleado, Galeria galeria, HashMap<Integer, ObraDeArte> mapaPiezas) {
 	    String ans = "";
 	    String[] codigos = codigosRegistro.split(", ");
 	    String tipoSolicitud = "Compra";
@@ -384,7 +384,7 @@ public class Galeria implements Serializable
 	    solicitud.crearSolicitudPiezas(codigosRegistro, identificacion);
 
 	    for (String codigo : codigos) {
-	        ObraDeArte pieza = piezas.get(Integer.parseInt(codigo));
+	        ObraDeArte pieza = mapaPiezas.get(Integer.parseInt(codigo));
 	        Compra compra = new Compra(fecha, fecha, identificacion);
 	        String estado_inicial = pieza.getEstado();
 
@@ -392,9 +392,9 @@ public class Galeria implements Serializable
 	            compra.bloquearPieza(pieza);
 	            if (compra.verificarCompra()) {
 	                compra.aprobarCompra();
-	                compra.agregarPiezaMapaPropiedades(identificacion, galeria, codigosRegistro, pieza);
+	                compra.agregarPiezaMapaPropiedades(identificacion, galeria, codigo, pieza);
 	                compra.actualizarPropietario(pieza, identificacion);
-	                compra.agregarPiezaMapaCompras(identificacion, galeria, codigosRegistro, pieza);
+	                compra.agregarPiezaMapaCompras(identificacion, galeria, codigo, pieza);
 	                compra.cambiarEstadoPieza(pieza);
 	                Pago pago = new Pago(tipoPago, pieza.getValor(), identificacion, Integer.parseInt(codigo));
 	                empleado.registrarPago(pago);
