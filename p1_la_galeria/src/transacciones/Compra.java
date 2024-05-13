@@ -22,7 +22,6 @@ public class Compra extends Transaccion
 	private HashMap<Integer, Usuario> Empleados;
 	private HashMap<Integer, Usuario> Clientes;
 	private HashMap<Integer, ObraDeArte> solicitudCompra;
-	private HashMap<Integer, ObraDeArte> solicitudSubasta;
 	private HashMap<Integer, ObraDeArte> obrasCompradas;
 		
 	
@@ -35,30 +34,19 @@ public class Compra extends Transaccion
 		this.Empleados = new HashMap<Integer, Usuario>( );
 		this.Clientes = new HashMap<Integer, Usuario>( );
 		this.solicitudCompra = new HashMap<Integer, ObraDeArte>( );
-		this.solicitudSubasta = new HashMap<Integer, ObraDeArte>( );
 		this.obrasCompradas = new HashMap<>();
 	}
 
 
 	//Métodos getters
 	
-	@Override
-	public Date getFechaSolicitud() {
-		// TODO Auto-generated method stub
-		return super.getFechaSolicitud();
-	}
 
 	@Override
 	public Date getFechaAprobacion() {
 		// TODO Auto-generated method stub
 		return super.getFechaAprobacion();
 	}
-
-	@Override
-	public int getComprador() {
-		// TODO Auto-generated method stub
-		return super.getComprador();
-	}
+	
 
 	@Override
 	public HashMap<Integer, Usuario> getEmpleados() {
@@ -72,18 +60,16 @@ public class Compra extends Transaccion
 		return super.getClientes();
 	}
 
-	@Override
 	public HashMap<String, ObraDeArte> getSolicitudCompra() {
-		// TODO Auto-generated method stub
-		return super.getSolicitudCompra();
+		return getSolicitudCompra();
 	}
 
-	@Override
-	public HashMap<String, ObraDeArte> getSolicitudSubasta() {
-		// TODO Auto-generated method stub
-		return super.getSolicitudSubasta();
-	}
     
+	public int getComprador() {
+		return comprador;
+	}
+
+
 	public boolean verificarCompra() {
 	    double totalCompra = 0.0;
 	    for (Map.Entry<Integer, ObraDeArte> entry : solicitudCompra.entrySet()) {

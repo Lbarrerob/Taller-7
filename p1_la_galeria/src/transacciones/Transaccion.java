@@ -16,9 +16,8 @@ public abstract class Transaccion implements Serializable
 	 */
 	private static final long serialVersionUID = 1L;
 	//atributos
-	private Date fechaSolicitud;
+
 	private Date fechaAprobacion;
-	private int comprador;
 	private HashMap<Integer, Usuario> Empleados;
 	private HashMap<Integer, Usuario> Clientes;
 	
@@ -31,19 +30,11 @@ public abstract class Transaccion implements Serializable
 		this.Clientes = new HashMap<Integer, Usuario>( );
 
 	}
-
 	
 	//Métodos getters
-	public Date getFechaSolicitud() {
-		return fechaSolicitud;
-	}
 
 	public Date getFechaAprobacion() {
 		return fechaAprobacion;
-	}
-
-	public int getComprador() {
-		return comprador;
 	}
 
 	public HashMap<Integer, Usuario> getEmpleados() {
@@ -56,25 +47,6 @@ public abstract class Transaccion implements Serializable
 	
 	
 	//Métodos específicos
-	
-	public boolean verificarEstadoPieza (String tipoSolicitud)
-	
-	{
-		HashMap<String, ObraDeArte> listaSolicitud = tipoSolicitud.equals("venta") ? solicitudCompra : tipoSolicitud.equals("subasta") ? solicitudSubasta : null;
-
-	    if (listaSolicitud == null) 
-	    {
-	        return false; 
-	    }
-
-	    for (ObraDeArte obra : listaSolicitud.values()) {
-	        if ((tipoSolicitud.equals("Compra") && !obra.getEstado().equals("En venta")) ||
-	            (tipoSolicitud.equals("Subasta") && !obra.getEstado().equals("En subasta"))) {
-	            return false;
-	        }
-	    }
-	    return true;
-	}
 	
 	
 	public void agregarPiezaMapaPropiedades(int idCliente, Galeria galeria, String codigoRegistro, ObraDeArte pieza) 
