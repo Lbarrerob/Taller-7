@@ -2,7 +2,7 @@ package inventario;
 
 import java.util.Date;
 
-import usuarios.Artista;
+import central.Artista;
 
 @SuppressWarnings("unused")
 public class Grabado extends ObraDeArte

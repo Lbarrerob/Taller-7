@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+import central.Artista;
 import inventario.ObraDeArte;
 import transacciones.Compra;
 import transacciones.Pago;
@@ -102,7 +103,7 @@ public class Empleado extends Usuario
 	public int determinarValorMinimoOferta(ArrayList<ObraDeArte> obras) {
 	    int totalValorMinimo = 0;
 	    for (ObraDeArte obra : obras) {
-	        if (this.tipo.equals("Administrador") && obra.getEstado().equals("En subasta")) {
+	        if (obra.getEstado().equals("En subasta")) {
 	            int valorMinimo = calcularValorMinimo(obra);
 	            obra.setValor_minimo(valorMinimo);
 	            System.out.println("Valor mínimo de oferta establecido para la obra " + obra.getCodigoRegistro() + ": " + valorMinimo);

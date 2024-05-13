@@ -13,12 +13,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 import transacciones.Compra;
 import transacciones.Pago;
 import transacciones.Subasta;
-import usuarios.Artista;
+import central.Artista;
 import usuarios.Cliente;
 import usuarios.Empleado;
 import usuarios.Usuario;
@@ -218,6 +217,16 @@ public class Galeria implements Serializable
     }
 	
 	
+	public Cliente buscarClientePorIdentificacion(int identificacion) {
+        for (Cliente cliente : clientes) {
+            if (cliente.getIdentificacion() == identificacion) {
+                return cliente;
+            }
+        }
+        return null; // Retorna null si no se encuentra el cliente
+    }
+	
+	
 	public String IngresarPinturaConsignacion (Date fechaIngreso, String titulo, int anio, String lugar, Artista autor, boolean exhibicion, String estado, int valor, 
 										boolean esFijo, int propietarioActual, Date fechaVenta, float alto, float ancho, String tecnica, String periodo, String genero) 
 	{
@@ -372,6 +381,40 @@ public class Galeria implements Serializable
 		}
 	}
 	
+	public boolean verificarComprador(String login, String password, double limiteCompra) {
+	    Cliente cliente = buscarClientePorLogin(login);
+	    if (cliente != null && cliente.verificarLogin(login, password)) {
+	        if (limiteCompra >= cliente.getIngreso()) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+	
+	
+	private Cliente buscarClientePorLogin(String login) {
+	    for (Usuario cliente : clientes) {
+	        if (cliente instanceof Cliente && cliente.getLogin().equals(login)) {
+	            return (Cliente) cliente;
+	        }
+	    }
+	    return null;
+	}
+	
+	public boolean verificarEmpleado(String login, String password) {
+	    Empleado empleado = buscarEmpleadoPorLogin(login);
+	    return empleado != null && empleado.verificarLogin(login, password);
+	}
+
+	private Empleado buscarEmpleadoPorLogin(String login) {
+	    for (Usuario empleado : empleados) {
+	        if (empleado instanceof Empleado && empleado.getLogin().equals(login)) {
+	            return (Empleado) empleado;
+	        }
+	    }
+	    return null;
+	}
+	
 	
 	public String comprarPiezas(String codigosRegistro, int identificacion, Date fecha, String tipoPago, Empleado empleado, Galeria galeria, HashMap<Integer, ObraDeArte> mapaPiezas) {
 	    String ans = "";
@@ -433,7 +476,7 @@ public class Galeria implements Serializable
 	            Cliente clienteBuscado = clientes.get(identificacion);
 	            String login = clienteBuscado.getLogin();
 	            String password = clienteBuscado.getPassword();
-	            if (subasta.verificarComprador(login, password, limiteFecha)) {
+	            if (verificarComprador(login, password, limiteFecha)) {
 	                if (subasta.verificarOferta(subasta, oferta)) {
 	                    Pago pago = new Pago(tipoPago, pieza.getValor(), identificacion, Integer.parseInt(codigo));
 	                    empleado.registrarPago(pago);

@@ -5,7 +5,8 @@ import inventario.ObraDeArte;
 
 import java.util.ArrayList;
 import java.util.Date;
-import usuarios.Artista;
+import central.Artista;
+import usuarios.Cliente;
 import usuarios.Empleado;
 
 public class ConsolaCliente extends ConsolaBasica
@@ -13,8 +14,9 @@ public class ConsolaCliente extends ConsolaBasica
 
 	//Atributos
 	
-		 private final String[] opcionesMenuPrincipal = new String[] {"Realizar oferta de compra", "Realizar oferta de subasta", "Ingresar pieza a consignación", "Salir"};
+		 private final String[] opcionesMenuPrincipal = new String[] {"Realizar oferta de compra", "Realizar oferta de subasta", "Ingresar pieza a consignación","Consultar historial de propiedades actuales", "Consultar historial de compras",  "Salir"};
 		 private final String[] opcionesMenuIngresoObra = new String[] {"Ceramica", "Escultura", "Fotografía", "Grabado", "Pintura", "Video"};
+		 
 		 //Métodos
 		 
 		 public void mostrarMenuPrincipal() 
@@ -34,6 +36,16 @@ public class ConsolaCliente extends ConsolaBasica
 		     else if(opcion == 3) 
 		     {
 		    	 ingresarPiezaConsignación();
+		     }
+		     
+		     else if(opcion == 4) 
+		     {
+		    	 consultarHistorialPropiedades();
+		     }
+		     
+		     else if(opcion == 5) 
+		     {
+		    	 consultarHistorialCompras();
 		     }
 		     
 		     else if(opcion == 4)
@@ -303,5 +315,34 @@ public class ConsolaCliente extends ConsolaBasica
 		 
 		 }
 		 
+		 public void consultarHistorialPropiedades() 
+		 {
+			 Galeria galeria = new Galeria();
+			 
+			 int identificacionCliente = pedirEnteroAlUsuario("Ingrese la identificación del cliente: ");
+			 Cliente cliente = galeria.buscarClientePorIdentificacion(identificacionCliente);
+
+			 ArrayList<ObraDeArte> historialPropiedades = cliente.consultarHistorialPropiedades(identificacionCliente);
+
+			 System.out.println("Historial de propiedades del cliente con identificación " + identificacionCliente + ":");
+			 for (ObraDeArte obra : historialPropiedades) {
+			    System.out.println("Título: " + obra.getTitulo() + ", Autor: " + obra.getAutor().getNombre());
+			    }
+		 }
+		 
+		 public void consultarHistorialCompras() 
+		 {
+			 Galeria galeria = new Galeria();
+			 
+			 int identificacionCliente = pedirEnteroAlUsuario("Ingrese la identificación del cliente: ");
+			 Cliente cliente = galeria.buscarClientePorIdentificacion(identificacionCliente);
+
+			 ArrayList<ObraDeArte> historialCompras = cliente.consultarHistorialCompras(identificacionCliente);
+
+			 System.out.println("Historial de compras del cliente con identificación " + identificacionCliente + ":");
+			 for (ObraDeArte obra : historialCompras) {
+			    System.out.println("Título: " + obra.getTitulo() + ", Autor: " + obra.getAutor().getNombre());
+			    }
+		 }
 		
 }

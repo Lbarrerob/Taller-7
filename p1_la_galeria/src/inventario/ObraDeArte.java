@@ -3,7 +3,9 @@ package inventario;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import usuarios.Artista;
+
+import central.Artista;
+
 
 public abstract class ObraDeArte implements Serializable
 {

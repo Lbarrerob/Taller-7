@@ -17,7 +17,7 @@ import inventario.ObraDeArte;
 import inventario.Video;
 import transacciones.Compra;
 import transacciones.Subasta;
-import usuarios.Artista;
+import central.Artista;
 import usuarios.Cliente;
 
 import org.junit.jupiter.api.AfterEach;
