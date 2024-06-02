@@ -1,4 +1,4 @@
-package Pasarelas;
+package pasarelas;
 
 import java.util.HashMap;
 
