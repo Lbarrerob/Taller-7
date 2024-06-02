@@ -17,7 +17,11 @@ import inventario.ObraDeArte;
 import inventario.Video;
 import transacciones.Compra;
 import transacciones.Subasta;
+<<<<<<< HEAD
 import central.Artista;
+=======
+import inventario.Artista;
+>>>>>>> branch 'main' of https://github.com/DPO-20241-GRUPO-1001/Proyecto_3.git
 import usuarios.Cliente;
 
 import org.junit.jupiter.api.AfterEach;

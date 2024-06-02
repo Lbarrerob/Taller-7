@@ -4,7 +4,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
+<<<<<<< HEAD
 import central.Artista;
+=======
+>>>>>>> branch 'main' of https://github.com/DPO-20241-GRUPO-1001/Proyecto_3.git
 
 
 public abstract class ObraDeArte implements Serializable

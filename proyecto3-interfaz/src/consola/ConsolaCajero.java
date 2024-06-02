@@ -1,6 +1,10 @@
 package consola;
 
+<<<<<<< HEAD
 import central.Artista;
+=======
+import inventario.Artista;
+>>>>>>> branch 'main' of https://github.com/DPO-20241-GRUPO-1001/Proyecto_3.git
 import central.Galeria;
 import transacciones.Pago;
 import usuarios.Empleado;

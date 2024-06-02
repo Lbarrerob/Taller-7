@@ -17,7 +17,11 @@ import java.util.Map;
 import transacciones.Compra;
 import transacciones.Pago;
 import transacciones.Subasta;
+<<<<<<< HEAD
 import central.Artista;
+=======
+import inventario.Artista;
+>>>>>>> branch 'main' of https://github.com/DPO-20241-GRUPO-1001/Proyecto_3.git
 import usuarios.Cliente;
 import usuarios.Empleado;
 import usuarios.Usuario;

@@ -2,7 +2,10 @@ package inventario;
 
 import java.util.Date;
 
+<<<<<<< HEAD
 import central.Artista;
+=======
+>>>>>>> branch 'main' of https://github.com/DPO-20241-GRUPO-1001/Proyecto_3.git
 
 @SuppressWarnings("unused")
 public class Ceramica extends ObraDeArte

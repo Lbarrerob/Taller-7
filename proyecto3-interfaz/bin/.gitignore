@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /central/
 /consola/
 /inventario/
@@ -5,3 +6,14 @@
 /tests/
 /transacciones/
 /usuarios/
+=======
+/Pasarelas/
+/central/
+/consola/
+/inventario/
+/persistencia/
+/tests/
+/transacciones/
+/usuarios/
+/pasarelas/
+>>>>>>> branch 'main' of https://github.com/DPO-20241-GRUPO-1001/Proyecto_3.git

@@ -17,7 +17,11 @@ import central.Galeria;
 import inventario.ObraDeArte;
 import inventario.Video;
 import transacciones.Compra;
+<<<<<<< HEAD
 import central.Artista;
+=======
+import inventario.Artista;
+>>>>>>> branch 'main' of https://github.com/DPO-20241-GRUPO-1001/Proyecto_3.git
 import usuarios.Cliente;
 import usuarios.Empleado;
 

@@ -35,6 +35,7 @@ public abstract class Usuario implements Serializable
 	public String getNombre() {
 		return nombre;
 	}
+<<<<<<< HEAD
 
 	public int getIdentificacion() {
 		return identificacion;
@@ -76,4 +77,48 @@ public abstract class Usuario implements Serializable
 
 }
 
+=======
+    
+	public int getIdentificacion() {
+		return identificacion;
+	}
+
+	public int getTelefono() {
+		return telefono;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+	
+	public void setNewPassword(String oldPassword, String newPassword) 
+	{
+		if (oldPassword.equals(password)) {
+			
+			if (password.length() == 8) {
+				System.out.println("La contraseña debe tener 8 caracteres.");
+				
+			} else {
+			
+				this.password = newPassword;
+				System.out.println("Su clave fue actualizada correctamente");
+			}	
+		}
+		
+	}
+	
+	public boolean verificarLogin(String login, String password) {
+	    return this.login.equals(login) && this.password.equals(password);
+	}
+
+}
+>>>>>>> branch 'main' of https://github.com/DPO-20241-GRUPO-1001/Proyecto_3.git
 

@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 
+<<<<<<< HEAD
 import central.Artista;
+=======
+import inventario.Artista;
+>>>>>>> branch 'main' of https://github.com/DPO-20241-GRUPO-1001/Proyecto_3.git
 import inventario.ObraDeArte;
 import transacciones.Compra;
 import transacciones.Pago;
